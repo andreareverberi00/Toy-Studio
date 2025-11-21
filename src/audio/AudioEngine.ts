@@ -9,7 +9,6 @@ export class AudioEngine {
     private timerID: number | null = null;
     private bpm: number = 128;
     private currentStep: number = 0;
-    private stepsPerBeat: number = 4; // 16th notes
     private totalSteps: number = 64; // 4 bars * 16 steps
     private callback: ((step: number, time: number) => void) | null = null;
 

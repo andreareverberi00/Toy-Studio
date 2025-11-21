@@ -1,5 +1,5 @@
 import React from 'react';
-import { Play, Square, Download, RotateCcw, Sliders, FilePlus, HelpCircle } from 'lucide-react';
+import { Play, Square, Download, Sliders, FilePlus, HelpCircle } from 'lucide-react';
 import { useProjectStore } from '../store/useProjectStore';
 import { cn } from '../utils/cn';
 
