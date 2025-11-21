@@ -29,25 +29,27 @@ export const PianoRoll: React.FC<{ trackId: string; onClose: () => void }> = ({ 
     });
 
     return (
-        <div className="fixed inset-x-0 bottom-0 h-96 bg-zinc-900 border-t border-zinc-700 shadow-2xl flex flex-col z-50 animate-in slide-in-from-bottom duration-300">
-            <div className="h-10 flex items-center justify-between px-4 border-b border-zinc-800 bg-zinc-800">
-                <div className="font-bold text-zinc-200 flex items-center gap-2">
+        <div className="fixed inset-0 md:inset-x-0 md:bottom-0 md:top-auto md:h-96 bg-zinc-900 border-t border-zinc-700 shadow-2xl flex flex-col z-50 animate-in slide-in-from-bottom duration-300">
+            <div className="h-12 sm:h-10 flex items-center justify-between px-3 sm:px-4 border-b border-zinc-800 bg-zinc-800">
+                <div className="font-bold text-sm sm:text-base text-zinc-200 flex items-center gap-2">
                     <div className={cn("w-3 h-3 rounded-full", track.color)} />
-                    {track.name} <span className="text-zinc-500 font-normal text-xs ml-2">Piano Roll (C Minor) - Bar {currentBar + 1}</span>
+                    <span className="truncate">{track.name}</span>
+                    <span className="text-zinc-500 font-normal text-xs ml-1 sm:ml-2 hidden sm:inline">Piano Roll (C Minor) - Bar {currentBar + 1}</span>
+                    <span className="text-zinc-500 font-normal text-xs ml-1 sm:hidden">Bar {currentBar + 1}</span>
                 </div>
-                <button onClick={onClose} className="p-1 hover:bg-zinc-700 rounded text-zinc-400 hover:text-zinc-100">
-                    <X size={18} />
+                <button onClick={onClose} className="p-1.5 sm:p-1 hover:bg-zinc-700 rounded text-zinc-400 hover:text-zinc-100 touch-manipulation">
+                    <X size={20} className="sm:w-[18px] sm:h-[18px]" />
                 </button>
             </div>
 
             <div className="flex-1 overflow-y-auto overflow-x-hidden relative flex">
                 {/* Keys (Left) */}
-                <div className="w-16 flex-shrink-0 border-r border-zinc-800 bg-zinc-900 sticky left-0 z-10">
+                <div className="w-14 sm:w-16 flex-shrink-0 border-r border-zinc-800 bg-zinc-900 sticky left-0 z-10">
                     {rows.map((row) => (
                         <div
                             key={row.note}
                             className={cn(
-                                "h-8 border-b border-zinc-800 flex items-center justify-end px-2 text-xs font-medium",
+                                "h-11 sm:h-8 border-b border-zinc-800 flex items-center justify-end px-1.5 sm:px-2 text-xs font-medium",
                                 row.label.includes('#') ? "bg-zinc-900 text-zinc-500" : "bg-zinc-800 text-zinc-300",
                                 row.isRoot && "text-orange-400"
                             )}
@@ -61,7 +63,7 @@ export const PianoRoll: React.FC<{ trackId: string; onClose: () => void }> = ({ 
                 <div className="flex-1 overflow-x-auto relative">
                     <div className="absolute inset-0 flex flex-col min-w-max">
                         {rows.map((row) => (
-                            <div key={row.note} className="h-8 flex border-b border-zinc-800/50">
+                            <div key={row.note} className="h-11 sm:h-8 flex border-b border-zinc-800/50">
                                 {Array.from({ length: 16 }).map((_, stepIndex) => {
                                     const step = pattern.steps[stepIndex];
                                     const isActive = step?.active && step?.note === row.note;
@@ -72,7 +74,7 @@ export const PianoRoll: React.FC<{ trackId: string; onClose: () => void }> = ({ 
                                         <button
                                             key={stepIndex}
                                             className={cn(
-                                                "w-12 border-r border-zinc-800/30 relative cursor-pointer hover:bg-zinc-800/20 focus:outline-none",
+                                                "w-14 sm:w-12 border-r border-zinc-800/30 relative cursor-pointer hover:bg-zinc-800/20 active:bg-zinc-800/30 focus:outline-none touch-manipulation",
                                                 isBeat && "border-zinc-800",
                                                 isCurrent && "bg-zinc-800/10"
                                             )}
@@ -80,13 +82,13 @@ export const PianoRoll: React.FC<{ trackId: string; onClose: () => void }> = ({ 
                                         >
                                             {isActive && (
                                                 <div className={cn(
-                                                    "absolute inset-0.5 rounded-sm shadow-sm",
+                                                    "absolute inset-1 sm:inset-0.5 rounded-sm shadow-sm",
                                                     track.color
                                                 )} />
                                             )}
                                             {/* Ghost note if step is active but different note? */}
                                             {step?.active && step?.note !== row.note && (
-                                                <div className="absolute inset-0.5 bg-zinc-800/50 rounded-sm opacity-20" />
+                                                <div className="absolute inset-1 sm:inset-0.5 bg-zinc-800/50 rounded-sm opacity-20" />
                                             )}
                                         </button>
                                     );

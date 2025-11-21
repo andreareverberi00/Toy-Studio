@@ -4,9 +4,25 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
+* {
+  /* Optimize touch interactions */
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  /* Smooth scrolling for mobile */
+  scroll-behavior: smooth;
+  /* Prevent text size adjustment on orientation change */
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   background-color: #18181b;
   /* zinc-950 */
   color: #f4f4f5;
   /* zinc-100 */
+  /* Prevent pull-to-refresh on mobile */
+  overscroll-behavior-y: contain;
+  /* Optimize touch scrolling */
+  -webkit-overflow-scrolling: touch;
 }

@@ -9,16 +9,16 @@ export const Sequencer: React.FC = () => {
     const bars = Array.from({ length: project.numBars }, (_, i) => i);
 
     return (
-        <div className="flex-1 bg-zinc-900 overflow-x-auto flex flex-col">
+        <div className="flex-shrink-0 md:flex-1 bg-zinc-900 flex flex-col md:overflow-hidden">
             {/* Bar Selector */}
-            <div className="h-8 border-b border-zinc-800 flex items-center px-2 gap-1 bg-zinc-900/50 sticky top-0 z-10">
-                <span className="text-[10px] font-bold text-zinc-500 uppercase mr-2">Pattern / Bar</span>
+            <div className="h-10 sm:h-8 border-b border-zinc-800 flex items-center px-2 gap-1 bg-zinc-900/50 sticky top-0 z-10">
+                <span className="text-[10px] sm:text-[10px] font-bold text-zinc-500 uppercase mr-1 sm:mr-2">Pattern / Bar</span>
                 {bars.map(bar => (
                     <button
                         key={bar}
                         onClick={() => setCurrentBar(bar)}
                         className={cn(
-                            "h-6 px-3 rounded text-xs font-bold transition-all relative overflow-hidden",
+                            "h-8 sm:h-6 px-4 sm:px-3 rounded text-sm sm:text-xs font-bold transition-all relative overflow-hidden touch-manipulation",
                             currentBar === bar
                                 ? "bg-orange-500 text-black"
                                 : "bg-zinc-800 text-zinc-500 hover:bg-zinc-700 hover:text-zinc-300"
@@ -34,9 +34,9 @@ export const Sequencer: React.FC = () => {
             </div>
 
             {/* Grid */}
-            <div className="flex-1 overflow-y-auto">
+            <div className="md:flex-1 md:overflow-y-auto">
                 {project.tracks.map((track) => (
-                    <div key={track.id} className="h-16 border-b border-zinc-800 flex relative group">
+                    <div key={track.id} className="h-20 sm:h-16 border-b border-zinc-800 flex relative group">
                         {/* Background Grid */}
                         <div className="absolute inset-0 flex pointer-events-none">
                             {STEPS.map((step) => (
@@ -62,8 +62,8 @@ export const Sequencer: React.FC = () => {
                                     key={stepIndex}
                                     onClick={() => toggleStep(track.id, stepIndex)}
                                     className={cn(
-                                        "flex-1 m-[1px] rounded-sm transition-all duration-75 relative overflow-hidden",
-                                        isActive ? track.color : "bg-zinc-800/30 hover:bg-zinc-700/50",
+                                        "flex-1 m-[2px] sm:m-[1px] rounded-sm transition-all duration-75 relative overflow-hidden touch-manipulation min-w-[44px] sm:min-w-0",
+                                        isActive ? track.color : "bg-zinc-800/30 hover:bg-zinc-700/50 active:bg-zinc-700",
                                         isCurrent && isPlaying && "ring-2 ring-white ring-opacity-80 z-10 scale-105 brightness-110",
                                         stepIndex % 4 === 0 && !isActive && "bg-zinc-700/50"
                                     )}

@@ -29,7 +29,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
     return (
         <div className="flex flex-col h-screen bg-zinc-950 text-zinc-100 overflow-hidden font-sans selection:bg-orange-500/30">
             <TransportBar />
-            <main className="flex-1 overflow-hidden relative flex">
+            <main className="flex-1 overflow-y-auto md:overflow-hidden relative flex flex-col md:flex-row">
                 {children}
             </main>
         </div>
